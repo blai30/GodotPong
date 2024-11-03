@@ -1,0 +1,161 @@
+[gd_scene load_steps=18 format=3 uid="uid://beawets3xb23m"]
+
+[ext_resource type="Texture2D" uid="uid://blqmhqe3aybuj" path="res://Court.png" id="1_4u2n4"]
+[ext_resource type="Texture2D" uid="uid://d18sgvgcwlagh" path="res://Ball.png" id="2_0d5re"]
+[ext_resource type="Script" path="res://Ball.cs" id="2_knx2l"]
+[ext_resource type="AudioStream" uid="uid://dekgpqule0d6s" path="res://bounce.mp3" id="3_jkexc"]
+[ext_resource type="Texture2D" uid="uid://wq670l25m1hk" path="res://Paddle.png" id="3_v20h4"]
+[ext_resource type="AudioStream" uid="uid://bvjeb48wml64y" path="res://music.mp3" id="4_a0m04"]
+[ext_resource type="Script" path="res://Player.cs" id="5_3r66i"]
+[ext_resource type="AudioStream" uid="uid://8634whtc3w56" path="res://player_score.mp3" id="5_l4fpl"]
+[ext_resource type="AudioStream" uid="uid://dv1f0jyjluiod" path="res://enemy_score.mp3" id="6_8c3ow"]
+[ext_resource type="Script" path="res://Enemy.cs" id="7_m6ha8"]
+[ext_resource type="Script" path="res://Rail.cs" id="8_ys0m8"]
+[ext_resource type="Script" path="res://Wall.cs" id="9_ttf0g"]
+[ext_resource type="Script" path="res://PauseScreen.cs" id="12_k6xsd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpfph"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4e03"]
+size = Vector2(30, 202)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4jv0"]
+size = Vector2(1280, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cogun"]
+size = Vector2(50, 720)
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Court" type="Sprite2D" parent="."]
+texture = ExtResource("1_4u2n4")
+centered = false
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("2_knx2l")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_gpfph")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("2_0d5re")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("3_jkexc")
+bus = &"Effects"
+
+[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("ScoreLabel")]
+position = Vector2(80, 360)
+script = ExtResource("5_3r66i")
+ScoreLabel = NodePath("../CanvasLayer/PlayerScore")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_d4e03")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_v20h4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("5_l4fpl")
+bus = &"Effects"
+
+[node name="Enemy" type="Area2D" parent="." node_paths=PackedStringArray("_follow", "ScoreLabel")]
+position = Vector2(1200, 360)
+script = ExtResource("7_m6ha8")
+_follow = NodePath("../Ball")
+ScoreLabel = NodePath("../CanvasLayer/EnemyScore")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_d4e03")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("3_v20h4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Enemy"]
+stream = ExtResource("6_8c3ow")
+bus = &"Effects"
+
+[node name="Top" type="Area2D" parent="."]
+position = Vector2(640, -25)
+script = ExtResource("8_ys0m8")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+shape = SubResource("RectangleShape2D_t4jv0")
+
+[node name="Bottom" type="Area2D" parent="."]
+position = Vector2(640, 745)
+script = ExtResource("8_ys0m8")
+_bounceDirection = -1
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+shape = SubResource("RectangleShape2D_t4jv0")
+
+[node name="Left" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+position = Vector2(0, 360)
+script = ExtResource("9_ttf0g")
+BallResetDirection = Vector2(1, 0)
+Scorer = NodePath("../Enemy")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+shape = SubResource("RectangleShape2D_cogun")
+
+[node name="Right" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+position = Vector2(1280, 360)
+script = ExtResource("9_ttf0g")
+Scorer = NodePath("../Player")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+shape = SubResource("RectangleShape2D_cogun")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerScore" type="Label" parent="CanvasLayer"]
+offset_right = 600.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "256"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="EnemyScore" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -600.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "512"
+clip_text = true
+
+[node name="PauseScreen" type="RichTextLabel" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[center][rainbow][wave amp=50 freq=3]PAUSED[/wave][/rainbow][/center]"
+script = ExtResource("12_k6xsd")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_a0m04")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
