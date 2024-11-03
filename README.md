@@ -1,5 +1,7 @@
 # GodotPong
 
+![image](https://github.com/user-attachments/assets/4f2769b0-94b2-4228-b059-287e18eeb20f)
+
 Pong game made in Godot with C#/.NET by following JetBrains' tutorial: https://www.jetbrains.com/guide/gamedev/tutorials/rider-godot-pong/
 
 Simple gameplay with player-controlled paddle (left) against computer-controlled AI paddle (right). Use arrow keys up and down to control the player. Pause/resume the game with the Esc key.
