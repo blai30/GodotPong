@@ -1,6 +1,6 @@
 # GodotPong
 
-![image](https://github.com/user-attachments/assets/4f2769b0-94b2-4228-b059-287e18eeb20f)
+![image](https://github.com/user-attachments/assets/90831cb3-ab5c-4a71-8878-efa99a5f8ea4)
 
 Pong game made in Godot with C#/.NET by following JetBrains' tutorial: https://www.jetbrains.com/guide/gamedev/tutorials/rider-godot-pong/
 
