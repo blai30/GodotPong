@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d18sgvgcwlagh"
-path="res://.godot/imported/Ball.png-3e5e22496e5c9e9b08e902070a717137.ctex"
+uid="uid://blqmhqe3aybuj"
+path="res://.godot/imported/Court.png-b90581dc49ef38a5c721c6135f67894a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ball.png"
-dest_files=["res://.godot/imported/Ball.png-3e5e22496e5c9e9b08e902070a717137.ctex"]
+source_file="res://Sprites/Court.png"
+dest_files=["res://.godot/imported/Court.png-b90581dc49ef38a5c721c6135f67894a.ctex"]
 
 [params]
 
