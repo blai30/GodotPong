@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dv1f0jyjluiod" path="res://Audio/enemy_score.mp3" id="6_8c3ow"]
 [ext_resource type="Script" path="res://Scripts/Enemy.cs" id="7_m6ha8"]
 [ext_resource type="Script" path="res://Scripts/Rail.cs" id="8_ys0m8"]
-[ext_resource type="Script" path="res://Scripts/Wall.cs" id="9_ttf0g"]
+[ext_resource type="Script" path="res://Scripts/Goal.cs" id="11_agdmm"]
 [ext_resource type="Script" path="res://Scripts/PauseScreen.cs" id="12_k6xsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gpfph"]
@@ -82,40 +82,40 @@ texture = ExtResource("3_v20h4")
 stream = ExtResource("6_8c3ow")
 bus = &"Effects"
 
-[node name="Top" type="Area2D" parent="."]
+[node name="TopRail" type="Area2D" parent="."]
 position = Vector2(640, -25)
 script = ExtResource("8_ys0m8")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopRail"]
 shape = SubResource("RectangleShape2D_t4jv0")
 
-[node name="Bottom" type="Area2D" parent="."]
+[node name="BottomRail" type="Area2D" parent="."]
 position = Vector2(640, 745)
 script = ExtResource("8_ys0m8")
 _bounceDirection = -1
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomRail"]
 shape = SubResource("RectangleShape2D_t4jv0")
 
-[node name="Left" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+[node name="LeftGoal" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
 position = Vector2(0, 360)
-script = ExtResource("9_ttf0g")
-BallResetDirection = Vector2(1, 0)
+script = ExtResource("11_agdmm")
 Scorer = NodePath("../Enemy")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal"]
 shape = SubResource("RectangleShape2D_cogun")
 
-[node name="Right" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+[node name="RightGoal" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
 position = Vector2(1280, 360)
-script = ExtResource("9_ttf0g")
+script = ExtResource("11_agdmm")
+BallResetDirection = Vector2(1, 0)
 Scorer = NodePath("../Player")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGoal"]
 shape = SubResource("RectangleShape2D_cogun")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -2,7 +2,7 @@ using Godot;
 
 namespace GodotPong;
 
-public partial class Wall : Area2D
+public partial class Goal : Area2D
 {
     [Export]
     public Vector2 BallResetDirection = Vector2.Left;

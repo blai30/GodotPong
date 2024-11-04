@@ -6,7 +6,7 @@ namespace GodotPong;
 public partial class Enemy : Area2D, IHasScore
 {
     [Export]
-    private float _difficulty = 0.2f;
+    private float _difficulty = 0.3f;
 
     [Export]
     private Area2D _follow;
